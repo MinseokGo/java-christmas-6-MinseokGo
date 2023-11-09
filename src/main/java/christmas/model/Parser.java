@@ -1,6 +1,6 @@
 package christmas.model;
 
-import java.util.Arrays;
+import christmas.utils.ErrorConstants;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +15,10 @@ public class Parser {
                     final String name = menu[0];
                     final int quantity = Integer.parseInt(menu[1]);
                     if (quantity < 1) {
-                        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                        throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
                     }
                     if (menus.containsKey(name)) {
-                        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                        throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
                     }
                     menus.put(name, quantity);
                 });
