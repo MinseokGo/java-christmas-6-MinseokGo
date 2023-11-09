@@ -1,5 +1,9 @@
 package christmas.model.menu;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", Type.APPETIZER, 6_000),
     TAPAS("타파스", Type.APPETIZER, 5_500),
@@ -23,6 +27,21 @@ public enum Menu {
 
     public String getName() {
         return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public static Map<String, Integer> getPriceOfMenu() {
+        Map<String, Integer> menus = new HashMap<>();
+        Arrays.stream(Menu.values())
+                .forEach(menu -> {
+                    final String name = menu.getName();
+                    final int price = menu.getPrice();
+                    menus.put(name, price);
+                });
+        return menus;
     }
 
     Menu(final String name, final Type type, final int price) {
