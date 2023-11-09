@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.model.Parser;
 import christmas.model.menu.Menu;
+import christmas.utils.ErrorConstants;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -34,6 +35,7 @@ public class InputValidator {
         try {
             isStringFormat(input);
             final Map<String, Integer> menus = Parser.menu(input);
+            isExistsMenu(menus);
             return false;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -56,7 +58,19 @@ public class InputValidator {
 
     private void isStringFormat(final String input) {
         if (!input.matches("^([가-힣]+)-(\\d+)(,[가-힣]+-(\\d+))*$")) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
+        }
+    }
+
+    private void isExistsMenu(final Map<String, Integer> menus) {
+        Set<String> existsMenu = Arrays.stream(Menu.values())
+                .map(Menu::getName)
+                .collect(Collectors.toSet());
+
+        for (String menu : menus.keySet()) {
+            if (!existsMenu.contains(menu)) {
+                throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
+            }
         }
     }
 }
