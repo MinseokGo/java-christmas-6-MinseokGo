@@ -21,7 +21,7 @@ public class Customer {
         return (visitDate - 1) * 100 + 1000;
     }
 
-    public int calculateWeekDayDiscount() {
+    public int calculateWeekendDiscount() {
         final int dayNumber = getDayNumber();
         final Map<String, Integer> menus = order.getMenus();
         if (dayNumber == 5 || dayNumber == 6) {
@@ -30,7 +30,7 @@ public class Customer {
         return 0;
     }
 
-    public int calculateWeekendDiscount() {
+    public int calculateWeekDayDiscount() {
         final int dayNumber = getDayNumber();
         final Map<String, Integer> menus = order.getMenus();
         if (!(dayNumber == 5) && !(dayNumber == 6)) {
