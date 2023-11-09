@@ -61,6 +61,10 @@ public class OutputView {
         isAllZeroMoney(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
     }
 
+    public void totalDiscountPrice(final int totalDiscount) {
+        System.out.println("\n<총혜택 금액>\n-" + decimalFormatter(totalDiscount));
+    }
+
     private void isAllZeroMoney(final int dDayDiscount,
                                 final int weekDayDiscount,
                                 final int weekendDiscount,

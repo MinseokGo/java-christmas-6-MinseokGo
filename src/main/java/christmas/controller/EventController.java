@@ -60,7 +60,8 @@ public class EventController {
 
     public void eventBenefitPreview() {
         initDiscount();
-
+        final int totalDiscount = discount.calculateTotalDiscount();
+        outputView.totalDiscountPrice(totalDiscount);
     }
 
     private void initDiscount() {
