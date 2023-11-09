@@ -14,4 +14,8 @@ public class Discount {
         this.specialDay = specialDay;
         this.gift = gift;
     }
+
+    public int calculateTotalDiscount() {
+        return dDay + weekDay + weekend + specialDay + gift;
+    }
 }
