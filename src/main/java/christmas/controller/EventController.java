@@ -42,5 +42,8 @@ public class EventController {
 
         final Map<String, Integer> menus = order.getMenus();
         outputView.orderMenu(menus);
+
+        final int totalPrice = order.calculateTotalPrice();
+        outputView.totalOrderPriceBeforeDiscount(totalPrice);
     }
 }
