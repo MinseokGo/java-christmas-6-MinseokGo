@@ -12,11 +12,19 @@ public class EventController {
         this.inputValidator = InputValidator.getInstance();
     }
 
-    public void plan() {
+    public void inputVisitDate() {
         inputView.askRestaurantVisitDateMessage();
         String input;
         do {
             input = Console.readLine();
         } while (inputValidator.visitDate(input));
+    }
+
+    public void inputOrderMenuAndNumberOfMenu() {
+        inputView.askOrderMenuAndNumberOfMenuMessage();
+        String input;
+        do {
+            input = Console.readLine();
+        } while (true);
     }
 }
