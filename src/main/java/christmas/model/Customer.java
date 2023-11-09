@@ -18,7 +18,10 @@ public class Customer {
     }
 
     public int calculateDDayDiscount() {
-        return (visitDate - 1) * 100 + 1000;
+        if (visitDate <= 25) {
+            return (visitDate - 1) * 100 + 1000;
+        }
+        return 0;
     }
 
     public int calculateWeekendDiscount() {
