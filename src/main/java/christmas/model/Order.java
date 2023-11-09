@@ -6,6 +6,7 @@ import java.util.Map;
 public class Order {
     private final Map<String, Integer> menus;
     private int totalPrice;
+    private int applyDiscountPrice;
     private Menu gift;
 
     public Order(final Map<String, Integer> menus) {
@@ -39,5 +40,9 @@ public class Order {
             return gift.getPrice();
         }
         return 0;
+    }
+
+    public int calculateApplyDiscountPrice(final int discount) {
+        return totalPrice - discount;
     }
 }
