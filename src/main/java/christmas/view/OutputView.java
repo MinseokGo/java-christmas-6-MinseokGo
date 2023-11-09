@@ -62,7 +62,7 @@ public class OutputView {
     }
 
     public void totalDiscountPrice(final int totalDiscount) {
-        System.out.println("\n<총혜택 금액>\n-" + decimalFormatter(totalDiscount));
+        System.out.println("\n<총혜택 금액>\n" +  decimalFormatter(-1 * totalDiscount));
     }
 
     private void isAllZeroMoney(final int dDayDiscount,
