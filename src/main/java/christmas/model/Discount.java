@@ -18,4 +18,8 @@ public class Discount {
     public int calculateTotalDiscount() {
         return dDay + weekDay + weekend + specialDay + gift;
     }
+
+    public int calculateRealDiscount() {
+        return dDay + weekDay + weekend + specialDay;
+    }
 }
