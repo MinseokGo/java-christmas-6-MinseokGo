@@ -15,6 +15,7 @@ public class InputValidator {
     public boolean visitDate(final String input) {
         try {
             isNumberFormat(input);
+            isNumberBoundary(input);
             return false;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -24,6 +25,13 @@ public class InputValidator {
 
     private void isNumberFormat(final String input) {
         if (!input.matches("\\d+")) {
+            throw new IllegalArgumentException(DATE_NOT_VALID_MESSAGE);
+        }
+    }
+
+    private void isNumberBoundary(final String input) {
+        final int number = Integer.parseInt(input);
+        if (1 > number || number > 31) {
             throw new IllegalArgumentException(DATE_NOT_VALID_MESSAGE);
         }
     }
