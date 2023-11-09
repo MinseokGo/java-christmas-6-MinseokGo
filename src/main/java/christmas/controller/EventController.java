@@ -1,6 +1,8 @@
 package christmas.controller;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.model.Customer;
+import christmas.model.Discount;
 import christmas.model.Order;
 import christmas.model.Parser;
 import christmas.model.menu.Menu;
@@ -9,7 +11,10 @@ import christmas.view.OutputView;
 import java.util.Map;
 
 public class EventController {
+    private int visitDate;
+    private Customer customer;
     private Order order;
+    private Discount discount;
     private final InputView inputView;
     private final OutputView outputView;
     private final InputValidator inputValidator;
@@ -26,6 +31,7 @@ public class EventController {
         do {
             input = Console.readLine();
         } while (inputValidator.visitDate(input));
+        visitDate = Integer.parseInt(input);
     }
 
     public void inputOrderMenuAndNumberOfMenu() {
@@ -35,11 +41,12 @@ public class EventController {
             input = Console.readLine();
         } while (inputValidator.orderMenuAndNumberOfMenu(input));
         final Map<String, Integer> menus = Parser.menu(input);
-        this.order = new Order(menus);
+        order = new Order(menus);
+        customer = new Customer(visitDate, order);
     }
 
-    public void previewEvent() {
-        outputView.eventPreviewMessage(23);
+    public void orderPreview() {
+        outputView.eventPreviewMessage(visitDate);
 
         final Map<String, Integer> menus = order.getMenus();
         outputView.orderMenu(menus);
@@ -49,5 +56,20 @@ public class EventController {
 
         final Menu menu = order.judgeCanGetGiftMenu();
         outputView.gift(menu);
+    }
+
+    public void eventBenefitPreview() {
+        initDiscount();
+
+    }
+
+    private void initDiscount() {
+        final int dDayDiscount = customer.calculateDDayDiscount();
+        final int weekDayDiscount = customer.calculateWeekDayDiscount();
+        final int weekendDiscount = customer.calculateWeekendDiscount();
+        final int specialDayDiscount = customer.calculateSpecialDayDiscount();
+        final int giftDiscount = customer.calculateGiftDiscount();
+        discount = new Discount(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
+        outputView.discountList(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
     }
 }
