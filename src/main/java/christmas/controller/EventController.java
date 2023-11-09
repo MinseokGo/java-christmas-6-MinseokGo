@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.model.Badge;
 import christmas.model.Customer;
 import christmas.model.Discount;
 import christmas.model.Order;
@@ -62,6 +63,10 @@ public class EventController {
         initDiscount();
         final int totalDiscount = discount.calculateTotalDiscount();
         outputView.totalDiscountPrice(totalDiscount);
+
+        final int realDiscountPrice = discount.calculateRealDiscount();
+        final int applyDiscountPrice = order.calculateApplyDiscountPrice(realDiscountPrice);
+        outputView.applyDiscountPrice(applyDiscountPrice);
     }
 
     private void initDiscount() {

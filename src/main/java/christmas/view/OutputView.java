@@ -65,6 +65,10 @@ public class OutputView {
         System.out.println("\n<총혜택 금액>\n" +  decimalFormatter(-1 * totalDiscount));
     }
 
+    public void applyDiscountPrice(final int applyDiscountPrice) {
+        System.out.println("\n<할인 후 예상 결제 금액>\n" +  decimalFormatter(applyDiscountPrice));
+    }
+
     private void isAllZeroMoney(final int dDayDiscount,
                                 final int weekDayDiscount,
                                 final int weekendDiscount,
