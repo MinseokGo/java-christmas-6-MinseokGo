@@ -5,9 +5,11 @@ import christmas.view.InputView;
 
 public class EventController {
     private final InputView inputView;
+    private final InputValidator inputValidator;
 
     public EventController() {
         this.inputView = InputView.getInstance();
+        this.inputValidator = InputValidator.getInstance();
     }
 
     public void plan() {
@@ -15,6 +17,6 @@ public class EventController {
         String input;
         do {
             input = Console.readLine();
-        } while (true);
+        } while (inputValidator.visitDate(input));
     }
 }
