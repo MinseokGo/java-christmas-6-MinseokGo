@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.model.menu.Menu;
 import java.text.DecimalFormat;
 import java.util.Map;
 
@@ -24,8 +25,15 @@ public class OutputView {
     }
 
     public void totalOrderPriceBeforeDiscount(final int totalPrice) {
-        System.out.println("<할인 전 총주문 금액>\n"
-                + decimalFormatter(totalPrice));
+        System.out.println("<할인 전 총주문 금액>\n" + decimalFormatter(totalPrice));
+    }
+
+    public void gift(final Menu gift) {
+        String result = "없음";
+        if (gift == Menu.CHAMPAGNE) {
+            result = "삼페인 1개";
+        }
+        System.out.println("<증정 메뉴>\n" + result);
     }
 
     private String decimalFormatter(final int totalPrice) {
