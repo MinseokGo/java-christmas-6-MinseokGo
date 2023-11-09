@@ -67,6 +67,9 @@ public class EventController {
         final int realDiscountPrice = discount.calculateRealDiscount();
         final int applyDiscountPrice = order.calculateApplyDiscountPrice(realDiscountPrice);
         outputView.applyDiscountPrice(applyDiscountPrice);
+
+        final String badgeName = Badge.getBadge(totalDiscount).getName();
+        outputView.acquiredBadge(badgeName);
     }
 
     private void initDiscount() {

@@ -69,6 +69,10 @@ public class OutputView {
         System.out.println("\n<할인 후 예상 결제 금액>\n" +  decimalFormatter(applyDiscountPrice));
     }
 
+    public void acquiredBadge(final String badgeName) {
+        System.out.println("\n<12월 이벤트 배지>\n" +  badgeName);
+    }
+
     private void isAllZeroMoney(final int dDayDiscount,
                                 final int weekDayDiscount,
                                 final int weekendDiscount,
