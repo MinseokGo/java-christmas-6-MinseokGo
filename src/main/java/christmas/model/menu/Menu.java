@@ -2,6 +2,7 @@ package christmas.model.menu;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public enum Menu {
@@ -36,6 +37,10 @@ public enum Menu {
         return name;
     }
 
+    public Type getType() {
+        return type;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -49,5 +54,12 @@ public enum Menu {
                     menus.put(name, price);
                 });
         return menus;
+    }
+
+    public static List<String> getMenuByType(final Type type) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.getType() == type)
+                .map(Menu::getName)
+                .toList();
     }
 }
