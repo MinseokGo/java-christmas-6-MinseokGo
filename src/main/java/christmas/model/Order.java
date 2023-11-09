@@ -10,6 +10,7 @@ public class Order {
 
     public Order(final Map<String, Integer> menus) {
         this.menus = menus;
+        this.gift = Menu.NONE;
     }
 
     public Map<String, Integer> getMenus() {
@@ -31,5 +32,12 @@ public class Order {
             return gift;
         }
         return Menu.NONE;
+    }
+
+    public int getGiftPrice() {
+        if (gift != Menu.NONE) {
+            return gift.getPrice();
+        }
+        return 0;
     }
 }
