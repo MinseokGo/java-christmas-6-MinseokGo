@@ -19,11 +19,18 @@ public enum Menu {
 
     ZERO_COLA("제로콜라", Type.DRINK, 3_000),
     RED_WINE("레드와인", Type.DRINK, 60_000),
-    CHAMPAGNE("샴페인", Type.DRINK, 25_000);
+    CHAMPAGNE("샴페인", Type.DRINK, 25_000),
+    NONE("없음", null, 0);
 
     private final String name;
     private final Type type;
     private final int price;
+
+    Menu(final String name, final Type type, final int price) {
+        this.name = name;
+        this.type = type;
+        this.price = price;
+    }
 
     public String getName() {
         return name;
@@ -42,11 +49,5 @@ public enum Menu {
                     menus.put(name, price);
                 });
         return menus;
-    }
-
-    Menu(final String name, final Type type, final int price) {
-        this.name = name;
-        this.type = type;
-        this.price = price;
     }
 }
