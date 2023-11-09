@@ -3,6 +3,7 @@ package christmas.controller;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.model.Order;
 import christmas.model.Parser;
+import christmas.model.menu.Menu;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Map;
@@ -45,5 +46,8 @@ public class EventController {
 
         final int totalPrice = order.calculateTotalPrice();
         outputView.totalOrderPriceBeforeDiscount(totalPrice);
+
+        final Menu menu = order.judgeCanGetGiftMenu();
+        outputView.gift(menu);
     }
 }
