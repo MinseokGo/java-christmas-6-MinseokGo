@@ -1,6 +1,5 @@
 package christmas.view;
 
-import christmas.model.Discount;
 import christmas.model.menu.Menu;
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -62,15 +61,15 @@ public class OutputView {
     }
 
     public void totalDiscountPrice(final int totalDiscount) {
-        System.out.println("\n<총혜택 금액>\n" +  decimalFormatter(-1 * totalDiscount));
+        System.out.println("\n<총혜택 금액>\n" + decimalFormatter(-1 * totalDiscount));
     }
 
     public void applyDiscountPrice(final int applyDiscountPrice) {
-        System.out.println("\n<할인 후 예상 결제 금액>\n" +  decimalFormatter(applyDiscountPrice));
+        System.out.println("\n<할인 후 예상 결제 금액>\n" + decimalFormatter(applyDiscountPrice));
     }
 
     public void acquiredBadge(final String badgeName) {
-        System.out.println("\n<12월 이벤트 배지>\n" +  badgeName);
+        System.out.println("\n<12월 이벤트 배지>\n" + badgeName);
     }
 
     private void isAllZeroMoney(final int dDayDiscount,
