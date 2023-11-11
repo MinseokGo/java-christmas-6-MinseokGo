@@ -67,4 +67,18 @@ public enum Menu {
                 .map(Menu::getName)
                 .toList();
     }
+
+    public static int countMenu(final Map<String, Integer> menus, final List<String> menuNamesByType) {
+        List<String> specificMenus = menus.keySet()
+                .stream()
+                .filter(menuNamesByType::contains)
+                .toList();
+        int count = 0;
+        for (String menu : menus.keySet()) {
+            if (specificMenus.contains(menu)) {
+                count += menus.get(menu);
+            }
+        }
+        return count;
+    }
 }
