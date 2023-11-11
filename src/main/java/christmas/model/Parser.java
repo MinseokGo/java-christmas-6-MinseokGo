@@ -11,6 +11,7 @@ public class Parser {
         Arrays.stream(input.split(","))
                 .map(item -> item.split("-"))
                 .forEach(menu -> processMenuEntry(menu, menus));
+        ParseValidator.isExceedNumberOfMenu(menus);
         ParseValidator.isOnlyDrink(menus);
         return menus;
     }
