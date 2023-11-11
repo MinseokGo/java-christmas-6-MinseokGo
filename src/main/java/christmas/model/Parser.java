@@ -1,6 +1,6 @@
 package christmas.model;
 
-import christmas.utils.ErrorConstants;
+import christmas.controller.ParseValidator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,14 +14,11 @@ public class Parser {
                 .forEach(menu -> {
                     final String name = menu[0];
                     final int quantity = Integer.parseInt(menu[1]);
-                    if (quantity < 1) {
-                        throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
-                    }
-                    if (menus.containsKey(name)) {
-                        throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
-                    }
+                    ParseValidator.isSmallerThanOne(quantity);
+                    ParseValidator.isDuplicateMenu(menus, name);
                     menus.put(name, quantity);
                 });
+        ParseValidator.isOnlyDrink(menus);
         return menus;
     }
 }
