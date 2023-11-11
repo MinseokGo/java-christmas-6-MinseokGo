@@ -4,5 +4,6 @@ public enum Type {
     APPETIZER,
     MAIN,
     DESSERT,
-    DRINK;
+    DRINK,
+    NONE;
 }

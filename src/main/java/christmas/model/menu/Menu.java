@@ -21,7 +21,7 @@ public enum Menu {
     ZERO_COLA("제로콜라", Type.DRINK, 3_000),
     RED_WINE("레드와인", Type.DRINK, 60_000),
     CHAMPAGNE("샴페인", Type.DRINK, 25_000),
-    NONE("없음", null, 0);
+    NONE("없음", Type.NONE, 0);
 
     private final String name;
     private final Type type;
@@ -43,6 +43,11 @@ public enum Menu {
 
     public int getPrice() {
         return price;
+    }
+
+    public static boolean getTypeByName(final String name) {
+        return Arrays.stream(Menu.values())
+                .anyMatch(menu -> menu.getName().equals(name) && menu.getType() != Type.DRINK);
     }
 
     public static Map<String, Integer> getPriceOfMenu() {
