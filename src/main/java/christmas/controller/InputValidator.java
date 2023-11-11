@@ -67,8 +67,7 @@ public class InputValidator {
                 .filter(menu -> !existsMenu.contains(menu))
                 .findAny()
                 .ifPresent(menu -> {
-                    System.out.println("menu = " + menu);
-                    throw new IllegalArgumentException("sex" + ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
+                    throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
                 });
     }
 }
