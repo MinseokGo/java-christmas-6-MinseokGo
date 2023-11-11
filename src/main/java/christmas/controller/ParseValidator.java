@@ -17,6 +17,16 @@ public class ParseValidator {
         }
     }
 
+    public static void isExceedNumberOfMenu(final Map<String, Integer> menus) {
+        final int count = menus.values()
+                .stream()
+                .mapToInt(numberOfMenu -> numberOfMenu)
+                .sum();
+        if (count > 20) {
+            throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
+        }
+    }
+
     public static void isOnlyDrink(final Map<String, Integer> menus) {
         final boolean isNotOnlyDrink = menus.keySet()
                 .stream()
