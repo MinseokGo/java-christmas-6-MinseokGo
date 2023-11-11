@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.model.menu.Menu;
+import christmas.utils.DateUtils;
 import java.text.DecimalFormat;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class OutputView {
     }
 
     public void eventPreviewMessage(final int visitDate) {
-        System.out.println("12월 " + visitDate + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
+        System.out.println(DateUtils.THIS_MONTH + "월 " + visitDate + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
     }
 
     public void orderMenu(final Map<String, Integer> menus) {
@@ -69,7 +70,7 @@ public class OutputView {
     }
 
     public void acquiredBadge(final String badgeName) {
-        System.out.println("\n<12월 이벤트 배지>\n" + badgeName);
+        System.out.println("\n<" + DateUtils.THIS_MONTH + "월 이벤트 배지>\n" + badgeName);
     }
 
     private void isAllZeroMoney(final int dDayDiscount,
