@@ -43,6 +43,7 @@ public class Order {
     }
 
     public int calculateApplyDiscountPrice(final int discount) {
-        return totalPrice - discount;
+        applyDiscountPrice = totalPrice - discount;
+        return applyDiscountPrice;
     }
 }
