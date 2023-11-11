@@ -32,7 +32,7 @@ public class OutputView {
     public void gift(final Menu gift) {
         String result = "없음";
         if (gift == Menu.CHAMPAGNE) {
-            result = gift.getName() + "1개";
+            result = gift.getName() + " 1개";
         }
         System.out.println("\n<증정 메뉴>\n" + result);
     }
