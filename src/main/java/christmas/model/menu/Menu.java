@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", Type.APPETIZER, 6_000),
@@ -43,6 +45,12 @@ public enum Menu {
 
     public int getPrice() {
         return price;
+    }
+
+    public static Set<String> getAllMenuName() {
+        return Arrays.stream(Menu.values())
+                .map(Menu::getName)
+                .collect(Collectors.toSet());
     }
 
     public static boolean getTypeByName(final String name) {
