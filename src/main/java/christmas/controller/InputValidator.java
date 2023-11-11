@@ -2,11 +2,10 @@ package christmas.controller;
 
 import christmas.model.Parser;
 import christmas.model.menu.Menu;
+import christmas.utils.DateUtils;
 import christmas.utils.ErrorConstants;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class InputValidator {
     public final String DATE_NOT_VALID_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
@@ -51,7 +50,7 @@ public class InputValidator {
 
     private void isNumberBoundary(final String input) {
         final int number = Integer.parseInt(input);
-        if (1 > number || number > 31) {
+        if (number < DateUtils.EVENT_START_DATE || number > DateUtils.EVENT_END_DATE) {
             throw new IllegalArgumentException(DATE_NOT_VALID_MESSAGE);
         }
     }
@@ -63,14 +62,13 @@ public class InputValidator {
     }
 
     private void isExistsMenu(final Map<String, Integer> menus) {
-        Set<String> existsMenu = Arrays.stream(Menu.values())
-                .map(Menu::getName)
-                .collect(Collectors.toSet());
-
-        for (String menu : menus.keySet()) {
-            if (!existsMenu.contains(menu)) {
-                throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
-            }
-        }
+        Set<String> existsMenu = Menu.getAllMenuName();
+        menus.keySet().stream()
+                .filter(menu -> !existsMenu.contains(menu))
+                .findAny()
+                .ifPresent(menu -> {
+                    System.out.println("menu = " + menu);
+                    throw new IllegalArgumentException("sex" + ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
+                });
     }
 }
