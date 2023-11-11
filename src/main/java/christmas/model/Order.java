@@ -18,6 +18,10 @@ public class Order {
         return menus;
     }
 
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
     public int calculateTotalPrice() {
         Map<String, Integer> prices = Menu.getPriceOfMenu();
         menus.keySet()

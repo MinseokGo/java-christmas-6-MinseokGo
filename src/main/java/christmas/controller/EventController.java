@@ -73,12 +73,22 @@ public class EventController {
     }
 
     private void initDiscount() {
+        final int totalPrice = order.getTotalPrice();
+        if (totalPrice <= 10000) {
+            discount = new Discount(0, 0, 0, 0, 0);
+            outputView.discountList(0, 0, 0, 0, 0);
+            return;
+        }
+        initDiscountCanGetEvent();
+    }
+
+    private void initDiscountCanGetEvent() {
         final int dDayDiscount = customer.calculateDDayDiscount();
         final int weekDayDiscount = customer.calculateWeekDayDiscount();
         final int weekendDiscount = customer.calculateWeekendDiscount();
         final int specialDayDiscount = customer.calculateSpecialDayDiscount();
         final int giftDiscount = customer.calculateGiftDiscount();
-        discount = new Discount(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
         outputView.discountList(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
+        discount = new Discount(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
     }
 }
