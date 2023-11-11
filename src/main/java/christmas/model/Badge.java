@@ -19,13 +19,13 @@ public enum Badge {
     }
 
     public static Badge getBadge(final int price) {
-        if (price >= 20000) {
+        if (price >= SANTA.price) {
             return SANTA;
         }
-        if (price >= 10000) {
+        if (price >= TREE.price) {
             return TREE;
         }
-        if (price >= 5000) {
+        if (price >= STAR.price) {
             return STAR;
         }
         return NONE;
