@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class Order {
     public static int MIN_PRICE = 10_000;
+    public static int MIN_NUMBER_OF_MENU = 1;
+    public static int MAX_NUMBER_OF_MENU = 20;
     private static int CHECK_GIFT_PRICE = 120_000;
 
     private final Map<String, Integer> menus;
