@@ -4,6 +4,9 @@ import christmas.model.menu.Menu;
 import java.util.Map;
 
 public class Order {
+    public static int MIN_PRICE = 10_000;
+    private static int CHECK_GIFT_PRICE = 120_000;
+
     private final Map<String, Integer> menus;
     private int totalPrice;
     private int applyDiscountPrice;
@@ -32,7 +35,7 @@ public class Order {
     }
 
     public Menu judgeCanGetGiftMenu() {
-        if (totalPrice >= 120000) {
+        if (totalPrice >= CHECK_GIFT_PRICE) {
             gift = Menu.CHAMPAGNE;
             return gift;
         }
@@ -43,7 +46,7 @@ public class Order {
         if (gift != Menu.NONE) {
             return gift.getPrice();
         }
-        return 0;
+        return Discount.NONE_DISCOUNT_PRICE;
     }
 
     public int calculateApplyDiscountPrice(final int discount) {

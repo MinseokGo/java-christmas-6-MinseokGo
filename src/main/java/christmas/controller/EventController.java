@@ -74,9 +74,11 @@ public class EventController {
 
     private void initDiscount() {
         final int totalPrice = order.getTotalPrice();
-        if (totalPrice <= 10000) {
-            discount = new Discount(0, 0, 0, 0, 0);
-            outputView.discountList(0, 0, 0, 0, 0);
+        if (totalPrice <= Order.MIN_PRICE) {
+            discount = new Discount(Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE,
+                    Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE);
+            outputView.discountList(Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE,
+                    Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE);
             return;
         }
         initDiscountCanGetEvent();
