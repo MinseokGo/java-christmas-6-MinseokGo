@@ -18,9 +18,10 @@ public class Customer {
 
     public int calculateDDayDiscount() {
         if (visitDate <= DateUtils.CHRISTMAS_DAY) {
-            return (visitDate - 1) * 100 + 1000;
+            return (visitDate - DateUtils.EVENT_START_DATE) * Discount.CHRISTMAS_DISCOUNT_PRICE
+                    + Discount.INIT_DISCOUNT_PRICE;
         }
-        return 0;
+        return Discount.NONE_DISCOUNT_PRICE;
     }
 
     public int calculateWeekendDiscount() {
@@ -29,7 +30,7 @@ public class Customer {
         if (day == DateUtils.FRIDAY || day == DateUtils.SATURDAY) {
             return calculateWeeklyDiscount(menus, Type.MAIN);
         }
-        return 0;
+        return Discount.NONE_DISCOUNT_PRICE;
     }
 
     public int calculateWeekDayDiscount() {
@@ -38,15 +39,15 @@ public class Customer {
         if (!(day == DateUtils.FRIDAY) && !(day == DateUtils.SATURDAY)) {
             return calculateWeeklyDiscount(menus, Type.DESSERT);
         }
-        return 0;
+        return Discount.NONE_DISCOUNT_PRICE;
     }
 
     public int calculateSpecialDayDiscount() {
         final int day = DateUtils.getDayNumber(visitDate);
         if (day == DateUtils.SUNDAY || visitDate == DateUtils.CHRISTMAS_DAY) {
-            return 1000;
+            return Discount.INIT_DISCOUNT_PRICE;
         }
-        return 0;
+        return Discount.NONE_DISCOUNT_PRICE;
     }
 
     public int calculateGiftDiscount() {
