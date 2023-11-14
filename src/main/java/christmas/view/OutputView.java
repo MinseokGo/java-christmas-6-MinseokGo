@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.util.Map;
 
 public class OutputView {
+    private static final int DISCOUNT_PREFIX_NUMBER = -1;
     private static final String DECIMAL_FORMAT = "###,###";
 
     private static final OutputView outputView = new OutputView();
@@ -47,25 +48,25 @@ public class OutputView {
                              final int giftDiscount) {
         System.out.println("\n<혜택 내역>");
         if (dDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("크리스마스 디데이 할인: -" + decimalFormatter(dDayDiscount));
+            System.out.println("크리스마스 디데이 할인: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * dDayDiscount));
         }
         if (weekDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("평일 할인: -" + decimalFormatter(weekDayDiscount));
+            System.out.println("평일 할인: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * weekDayDiscount));
         }
         if (weekendDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("주말 할인: -" + decimalFormatter(weekendDiscount));
+            System.out.println("주말 할인: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * weekendDiscount));
         }
         if (specialDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("특별 할인: -" + decimalFormatter(specialDayDiscount));
+            System.out.println("특별 할인: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * specialDayDiscount));
         }
         if (giftDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("증정 이벤트: -" + decimalFormatter(giftDiscount));
+            System.out.println("증정 이벤트: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * giftDiscount));
         }
         isAllZeroMoney(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
     }
 
     public void totalDiscountPrice(final int totalDiscount) {
-        System.out.println("\n<총혜택 금액>\n" + decimalFormatter(-1 * totalDiscount));
+        System.out.println("\n<총혜택 금액>\n" + decimalFormatter(DISCOUNT_PREFIX_NUMBER * totalDiscount));
     }
 
     public void applyDiscountPrice(final int applyDiscountPrice) {
