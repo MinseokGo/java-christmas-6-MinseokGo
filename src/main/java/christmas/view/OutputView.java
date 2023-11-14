@@ -3,12 +3,23 @@ package christmas.view;
 import christmas.model.Discount;
 import christmas.model.menu.Menu;
 import christmas.utils.DateUtils;
+import christmas.utils.ErrorConstants;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class OutputView {
+    private static final int INIT_VALUE = 0;
     private static final int DISCOUNT_PREFIX_NUMBER = -1;
     private static final String DECIMAL_FORMAT = "###,###";
+    private static final Map<String, Integer> DISCOUNT_MAP = Map.of(
+            "크리스마스 디데이 할인", 0,
+            "평일 할인", 1,
+            "주말 할인", 2,
+            "특별 할인", 3,
+            "증정 이벤트", 4
+    );
 
     private static final OutputView outputView = new OutputView();
 
@@ -41,28 +52,15 @@ public class OutputView {
         System.out.println("\n<증정 메뉴>\n" + result);
     }
 
-    public void discountList(final int dDayDiscount,
-                             final int weekDayDiscount,
-                             final int weekendDiscount,
-                             final int specialDayDiscount,
-                             final int giftDiscount) {
+    public void discountList(final int... discounts) {
         System.out.println("\n<혜택 내역>");
-        if (dDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("크리스마스 디데이 할인: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * dDayDiscount));
-        }
-        if (weekDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("평일 할인: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * weekDayDiscount));
-        }
-        if (weekendDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("주말 할인: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * weekendDiscount));
-        }
-        if (specialDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("특별 할인: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * specialDayDiscount));
-        }
-        if (giftDiscount != Discount.NONE_DISCOUNT_PRICE) {
-            System.out.println("증정 이벤트: " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * giftDiscount));
-        }
-        isAllZeroMoney(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
+        IntStream.range(INIT_VALUE, discounts.length)
+                .filter(i -> discounts[i] != Discount.NONE_DISCOUNT_PRICE)
+                .forEach(i -> {
+                    final String benefit = getKeyByValue(i);
+                    System.out.println(benefit + ": " + decimalFormatter(DISCOUNT_PREFIX_NUMBER * discounts[i]));
+                });
+        isAllZeroMoney(discounts);
     }
 
     public void totalDiscountPrice(final int totalDiscount) {
@@ -77,16 +75,19 @@ public class OutputView {
         System.out.println("\n<" + DateUtils.THIS_MONTH + "월 이벤트 배지>\n" + badgeName);
     }
 
-    private void isAllZeroMoney(final int dDayDiscount,
-                                final int weekDayDiscount,
-                                final int weekendDiscount,
-                                final int specialDayDiscount,
-                                final int giftDiscount) {
-        if (dDayDiscount == Discount.NONE_DISCOUNT_PRICE
-                && weekDayDiscount == Discount.NONE_DISCOUNT_PRICE
-                && weekendDiscount == Discount.NONE_DISCOUNT_PRICE
-                && specialDayDiscount == Discount.NONE_DISCOUNT_PRICE
-                && giftDiscount == Discount.NONE_DISCOUNT_PRICE) {
+    private String getKeyByValue(final int value) {
+        for (String key : DISCOUNT_MAP.keySet()) {
+            if (DISCOUNT_MAP.get(key).equals(value)) {
+                return key;
+            }
+        }
+        throw new IllegalArgumentException(ErrorConstants.EVENT_NOT_VALID_MESSAGE);
+    }
+
+    private void isAllZeroMoney(final int... discounts) {
+        final boolean isZero = Arrays.stream(discounts)
+                .allMatch(discount -> discount == Discount.NONE_DISCOUNT_PRICE);
+        if (isZero) {
             System.out.println("없음");
         }
     }
