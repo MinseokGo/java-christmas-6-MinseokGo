@@ -8,7 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class InputValidator {
-    public final String DATE_NOT_VALID_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    private static final String IS_NUMBER_FORMAT = "\\d+";
+    private static final String IS_VALID_MENU_INPUT_FORMAT = "^([가-힣]+)-(\\d+)(,[가-힣]+-(\\d+))*$";
 
     private static final InputValidator inputValidator = new InputValidator();
 
@@ -43,20 +44,20 @@ public class InputValidator {
     }
 
     private void isNumberFormat(final String input) {
-        if (!input.matches("\\d+")) {
-            throw new IllegalArgumentException(DATE_NOT_VALID_MESSAGE);
+        if (!input.matches(IS_NUMBER_FORMAT)) {
+            throw new IllegalArgumentException(ErrorConstants.DATE_NOT_VALID_MESSAGE);
         }
     }
 
     private void isNumberBoundary(final String input) {
         final int number = Integer.parseInt(input);
         if (number < DateUtils.EVENT_START_DATE || number > DateUtils.EVENT_END_DATE) {
-            throw new IllegalArgumentException(DATE_NOT_VALID_MESSAGE);
+            throw new IllegalArgumentException(ErrorConstants.DATE_NOT_VALID_MESSAGE);
         }
     }
 
     private void isStringFormat(final String input) {
-        if (!input.matches("^([가-힣]+)-(\\d+)(,[가-힣]+-(\\d+))*$")) {
+        if (!input.matches(IS_VALID_MENU_INPUT_FORMAT)) {
             throw new IllegalArgumentException(ErrorConstants.MENU_INPUT_NOT_VALID_MESSAGE);
         }
     }
