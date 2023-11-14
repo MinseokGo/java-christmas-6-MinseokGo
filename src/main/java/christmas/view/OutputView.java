@@ -1,11 +1,14 @@
 package christmas.view;
 
+import christmas.model.Discount;
 import christmas.model.menu.Menu;
 import christmas.utils.DateUtils;
 import java.text.DecimalFormat;
 import java.util.Map;
 
 public class OutputView {
+    private static final String DECIMAL_FORMAT = "###,###";
+
     private static final OutputView outputView = new OutputView();
 
     private OutputView() {
@@ -43,19 +46,19 @@ public class OutputView {
                              final int specialDayDiscount,
                              final int giftDiscount) {
         System.out.println("\n<혜택 내역>");
-        if (dDayDiscount != 0) {
+        if (dDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
             System.out.println("크리스마스 디데이 할인: -" + decimalFormatter(dDayDiscount));
         }
-        if (weekDayDiscount != 0) {
+        if (weekDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
             System.out.println("평일 할인: -" + decimalFormatter(weekDayDiscount));
         }
-        if (weekendDiscount != 0) {
+        if (weekendDiscount != Discount.NONE_DISCOUNT_PRICE) {
             System.out.println("주말 할인: -" + decimalFormatter(weekendDiscount));
         }
-        if (specialDayDiscount != 0) {
+        if (specialDayDiscount != Discount.NONE_DISCOUNT_PRICE) {
             System.out.println("특별 할인: -" + decimalFormatter(specialDayDiscount));
         }
-        if (giftDiscount != 0) {
+        if (giftDiscount != Discount.NONE_DISCOUNT_PRICE) {
             System.out.println("증정 이벤트: -" + decimalFormatter(giftDiscount));
         }
         isAllZeroMoney(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
@@ -78,17 +81,17 @@ public class OutputView {
                                 final int weekendDiscount,
                                 final int specialDayDiscount,
                                 final int giftDiscount) {
-        if (dDayDiscount == 0
-                && weekDayDiscount == 0
-                && weekendDiscount == 0
-                && specialDayDiscount == 0
-                && giftDiscount == 0) {
+        if (dDayDiscount == Discount.NONE_DISCOUNT_PRICE
+                && weekDayDiscount == Discount.NONE_DISCOUNT_PRICE
+                && weekendDiscount == Discount.NONE_DISCOUNT_PRICE
+                && specialDayDiscount == Discount.NONE_DISCOUNT_PRICE
+                && giftDiscount == Discount.NONE_DISCOUNT_PRICE) {
             System.out.println("없음");
         }
     }
 
     private String decimalFormatter(final int totalPrice) {
-        DecimalFormat decimalFormat = new DecimalFormat("###,###");
+        DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_FORMAT);
         return decimalFormat.format(totalPrice) + "원";
     }
 }
