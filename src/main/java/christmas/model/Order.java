@@ -4,10 +4,10 @@ import christmas.model.menu.Menu;
 import java.util.Map;
 
 public class Order {
-    public static int MIN_PRICE = 10_000;
-    public static int MIN_NUMBER_OF_MENU = 1;
-    public static int MAX_NUMBER_OF_MENU = 20;
-    private static int CHECK_GIFT_PRICE = 120_000;
+    public static final int MIN_PRICE = 10_000;
+    public static final int MIN_NUMBER_OF_MENU = 1;
+    public static final int MAX_NUMBER_OF_MENU = 20;
+    private static final int CHECK_GIFT_PRICE = 120_000;
 
     private final Map<String, Integer> menus;
     private int totalPrice;
@@ -28,7 +28,7 @@ public class Order {
     }
 
     public int calculateTotalPrice() {
-        Map<String, Integer> prices = Menu.getPriceOfMenu();
+        final Map<String, Integer> prices = Menu.getPriceOfMenu();
         menus.keySet()
                 .forEach(menu -> {
                     totalPrice += prices.get(menu) * menus.get(menu);

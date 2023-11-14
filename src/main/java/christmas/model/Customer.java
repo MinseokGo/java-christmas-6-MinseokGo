@@ -9,7 +9,6 @@ import java.util.Map;
 public class Customer {
     private final int visitDate;
     private final Order order;
-    private Discount discount;
 
     public Customer(final int visitDate, final Order order) {
         this.visitDate = visitDate;

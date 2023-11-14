@@ -59,7 +59,7 @@ public enum Menu {
     }
 
     public static Map<String, Integer> getPriceOfMenu() {
-        Map<String, Integer> menus = new HashMap<>();
+        final Map<String, Integer> menus = new HashMap<>();
         Arrays.stream(Menu.values())
                 .forEach(menu -> {
                     final String name = menu.getName();

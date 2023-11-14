@@ -63,7 +63,7 @@ public class InputValidator {
     }
 
     private void isExistsMenu(final Map<String, Integer> menus) {
-        Set<String> existsMenu = Menu.getAllMenuName();
+        final Set<String> existsMenu = Menu.getAllMenuName();
         menus.keySet().stream()
                 .filter(menu -> !existsMenu.contains(menu))
                 .findAny()
