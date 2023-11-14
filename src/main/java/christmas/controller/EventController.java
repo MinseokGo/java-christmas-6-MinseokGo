@@ -15,15 +15,16 @@ public class EventController {
     private int visitDate;
     private Customer customer;
     private Order order;
-    private Discount discount;
+    private final Discount discount;
     private final InputView inputView;
     private final OutputView outputView;
     private final InputValidator inputValidator;
 
-    public EventController() {
+    public EventController(final Discount discount) {
         this.inputView = InputView.getInstance();
         this.outputView = OutputView.getInstance();
         this.inputValidator = InputValidator.getInstance();
+        this.discount = discount;
     }
 
     public void inputVisitDate() {
@@ -75,8 +76,6 @@ public class EventController {
     private void initDiscount() {
         final int totalPrice = order.getTotalPrice();
         if (totalPrice <= Order.MIN_PRICE) {
-            discount = new Discount(Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE,
-                    Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE);
             outputView.discountList(Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE,
                     Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE, Discount.NONE_DISCOUNT_PRICE);
             return;
@@ -85,12 +84,11 @@ public class EventController {
     }
 
     private void initDiscountCanGetEvent() {
-        final int dDayDiscount = customer.calculateDDayDiscount();
-        final int weekDayDiscount = customer.calculateWeekDayDiscount();
-        final int weekendDiscount = customer.calculateWeekendDiscount();
-        final int specialDayDiscount = customer.calculateSpecialDayDiscount();
-        final int giftDiscount = customer.calculateGiftDiscount();
+        final int dDayDiscount = discount.calculateDDayDiscount(visitDate);
+        final int weekDayDiscount = discount.calculateWeekDayDiscount(visitDate, order);
+        final int weekendDiscount = discount.calculateWeekendDiscount(visitDate, order);
+        final int specialDayDiscount = discount.calculateSpecialDayDiscount(visitDate);
+        final int giftDiscount = discount.calculateGiftDiscount(order);
         outputView.discountList(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
-        discount = new Discount(dDayDiscount, weekDayDiscount, weekendDiscount, specialDayDiscount, giftDiscount);
     }
 }
