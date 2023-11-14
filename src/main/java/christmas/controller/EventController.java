@@ -2,7 +2,6 @@ package christmas.controller;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.model.Badge;
-import christmas.model.Customer;
 import christmas.model.Discount;
 import christmas.model.Order;
 import christmas.model.Parser;
@@ -13,7 +12,6 @@ import java.util.Map;
 
 public class EventController {
     private int visitDate;
-    private Customer customer;
     private Order order;
     private final Discount discount;
     private final InputView inputView;
@@ -44,7 +42,6 @@ public class EventController {
         } while (inputValidator.orderMenuAndNumberOfMenu(input));
         final Map<String, Integer> menus = Parser.menu(input);
         order = new Order(menus);
-        customer = new Customer(visitDate, order);
     }
 
     public void orderPreview() {
