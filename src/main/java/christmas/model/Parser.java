@@ -6,10 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Parser {
+    private static final String INPUT_SPLIT_REGEX = ",";
+    private static final String MENU_INPUT_SPLIT_REGEX = "-";
+
     public static Map<String, Integer> menu(final String input) {
         final Map<String, Integer> menus = new HashMap<>();
-        Arrays.stream(input.split(","))
-                .map(item -> item.split("-"))
+        Arrays.stream(input.split(INPUT_SPLIT_REGEX))
+                .map(item -> item.split(MENU_INPUT_SPLIT_REGEX))
                 .forEach(menu -> processMenuEntry(menu, menus));
         ParseValidator.isExceedNumberOfMenu(menus);
         ParseValidator.isOnlyDrink(menus);
