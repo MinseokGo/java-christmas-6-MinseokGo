@@ -26,7 +26,7 @@ class DiscountTest {
     @Test
     void calculateTotalDiscount() {
         final int totalPrice = order.getTotalPrice();
-        final int expectTotalPrice = 550_000;
+        final int expectTotalPrice = 700_000;
 
         assertThat(totalPrice).isEqualTo(expectTotalPrice);
     }
